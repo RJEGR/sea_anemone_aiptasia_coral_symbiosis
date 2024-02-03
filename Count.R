@@ -57,3 +57,5 @@ h <- heatmap(sample_cor, col = cm.colors(12), keep.dendro = T)
 hc_samples <- as.hclust(h$Rowv)
 
 hc_order <- hc_samples$labels[h$rowInd]
+
+# https://github.com/RJEGR/Small-RNASeq-data-analysis/blob/master/E_expression_analysis/COUNT_TRANSFORMATION.R
