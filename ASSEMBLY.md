@@ -1,8 +1,9 @@
-# Preprocessing libs
-# test wich adapter w/ trim_galone
-
-
 # Shorstacks
+
+## Preprocessing libs
+
+Test wich adapter w/ trim_galone
+
 
 ## 1) Reference
 # 1.1) decompress
@@ -13,19 +14,20 @@ iptasia_genome_1.1_genomic.fna.gz > GCA_001417965.1_Aiptasia_genome_1.1_genomic.
 ```
 
 # Concat
-
+```bash
 grep -c "^>" *.fna 
 
 # GCA_001417965.1_Aiptasia_genome_1.1_genomic.fna:4312
 # GCA_001939145.1_ASM193914v1_genomic.fna:9688
 # GENOMES.fna:14000
 
-/mnt/nfs/home/francesco.cicala/Corals/Reference_Genome/Aipstasia_genome/GCA_001417965.1_Aiptasia_genome_1.1_genomic.fna.gz
-/mnt/nfs/home/francesco.cicala/Corals/Reference_Genome/Symbiodinium_microadriaticum/d
-ata/GCA_001939145.1
+#/mnt/nfs/home/francesco.cicala/Corals/Reference_Genome/Aipstasia_genome/GCA_001417965.1_Aiptasia_genome_1.1_genomic.fna.gz
+#/mnt/nfs/home/francesco.cicala/Corals/Reference_Genome/Symbiodinium_microadriaticum/data/GCA_001939145.1
 
 cat GCA_001417965.1_Aiptasia_genome_1.
 1_genomic.fna GCA_001939145.1_ASM193914v1_genomic.fna > GENOMES.fna
+
+```
 
 ## X) Run
 
