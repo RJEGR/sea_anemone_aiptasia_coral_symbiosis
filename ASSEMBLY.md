@@ -1,8 +1,18 @@
-# Shorstacks
+# Assembly microRNAs
 
 ## Preprocessing libs
 
 Test wich adapter w/ trim_galone
+
+```bash
+for i in $(ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_*/*
+.fastq); do trim_galore $i --small_rna --cores 12; done
+
+mkdir -p REPORTS
+mv *.txt REPORTS
+```
+
+
 
 
 ## 1) Reference
@@ -37,10 +47,17 @@ ShortStack --version
 
 
 #readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_*/*.fastq`
-readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_Argonaute-CLIP/*.fastq`
 
-ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --pad 1 --readfile $readfile
+readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/*.fq`
+
+ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --readfile $readfile
 
 # &>> "ShortStack_"$(date +%Y%m%d)".log" &
+
+mkdir -p OUTPUTS
+
+cp -r Counts.txt mir.fasta Results.txt strucVis/ alignment_details.tsv OUTPUTS/
+
+ scp -r francesco.cicala@home.bca.unipd.it://mnt/nfs/home/francesco.cicala/Corals/RICARDO/ShortStack_20240203_out/OUTPUTS .
 
 ```
