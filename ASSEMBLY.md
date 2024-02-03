@@ -30,13 +30,17 @@ cat GCA_001417965.1_Aiptasia_genome_1.
 ```
 
 ## X) Run
-
+```bash
 conda env list
 conda activate ShortStack4 
 ShortStack --version
 
 
-
 #readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_*/*.fastq`
 readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_Argonaute-CLIP/*.fastq`
-ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --pad 1 --readfile $readfile --autotrim &>> "ShortStack_"$(date +%Y%m%d)".log" &
+
+ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --pad 1 --readfile $readfile
+
+# &>> "ShortStack_"$(date +%Y%m%d)".log" &
+
+```
