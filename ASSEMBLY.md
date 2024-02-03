@@ -1,9 +1,16 @@
+# Preprocessing libs
+# test wich adapter w/ trim_galone
+
+
 # Shorstacks
 
 ## 1) Reference
 # 1.1) decompress
+
+```bash
 zcat GCA_001417965.1_A
 iptasia_genome_1.1_genomic.fna.gz > GCA_001417965.1_Aiptasia_genome_1.1_genomic.fna
+```
 
 # Concat
 
