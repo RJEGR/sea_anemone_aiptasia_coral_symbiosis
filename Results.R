@@ -18,6 +18,8 @@ RESULTS <- read_tsv(res_f)
 
 # Q: Number of novel and know miRs annotated
 
+RESULTS %>% dplyr::count(MIRNA)
+
 RES <- RESULTS %>% 
   select(Locus, Name, known_miRNAs, MIRNA) %>%
   mutate(known_miRNAs = ifelse(is.na(known_miRNAs) & MIRNA == "Y", Name, known_miRNAs)) %>%
@@ -27,6 +29,9 @@ RES <- RESULTS %>%
 
 # count number of true novel + homology-identify sRNA locus
 
-RES %>% count(Type)
+RES %>% dplyr::count(Type)
 
 table(substr(RES$Locus, 1,2))
+
+
+RESULTS %>% dplyr::count(substr(Chrom, 1,8))
