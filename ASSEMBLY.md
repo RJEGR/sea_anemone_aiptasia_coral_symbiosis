@@ -12,6 +12,24 @@ mkdir -p REPORTS
 mv *.txt REPORTS
 ```
 
+## Mirtrace
+
+```bash
+..
+
+for i in $(ls *.fasta); do seqkit fx2tab $i -l -g -H > ${i%.fasta}.profiling; done &
+
+for i  in $(ls *.fasta); do cat $i | seqkit grep -n -r -p "rnatype:mirna" -p "rnatype:unknown" >  ${i%.fasta}.mirna.unknown.fa; done
+
+mkdir -p PROFILING_BY_READ_LENGTH
+mv *.profiling PROFILING_BY_READ_LENGTH
+
+```
+
+
+
+
+
 
 
 
@@ -48,11 +66,11 @@ ShortStack --version
 
 #readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Raw_Seqs/Aiptasia_*/*.fastq`
 
-readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/*.fq`
+#readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/*.fq`
 
-ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --readfile $readfile
+readfile=`ls -x /mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/mirtrace.20240207-164934.646/qc_passed_reads.rnatype_unknown.uncollapsed/*.mirna.unknown.fasta`
 
-# &>> "ShortStack_"$(date +%Y%m%d)".log" &
+ShortStack --genomefile GENOMES.fa --known_miRNAs ALL-mat.fa --dn_mirna --outdir ShortStack_"$(date +%Y%m%d)"_out --threads 24 --dicermax 30 --mmap u --mincov 0.8 --readfile $readfile &>> "ShortStack_"$(date +%Y%m%d)".log" &
 
 mkdir -p OUTPUTS
 
