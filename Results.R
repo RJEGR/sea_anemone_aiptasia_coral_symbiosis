@@ -6,8 +6,8 @@ options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 
 #dir <- "C:\\wsl.localhos\Ubuntu\home\ricardo\SHORTSTACKS_OUTPUTS"
 
-path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
-
+# path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
 setwd(path)
 
 res_f <- list.files(path = path, pattern = "Results.txt", full.names = T)
