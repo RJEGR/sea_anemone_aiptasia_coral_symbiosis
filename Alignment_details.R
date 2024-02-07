@@ -19,7 +19,10 @@ library(tidyverse)
 
 recode_to <- c(`U` = "Uniquely ", `P`= "Multimapper (mmap)",`R` = "Random mmap", `H` = "Highly mmap (>=50 hits) ", `N` = "Unmapped")
 
-path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+# path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+
+path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
+
 
 setwd(path)
 
@@ -27,7 +30,7 @@ f <- list.files(path = path, pattern = "alignment_details.tsv", full.names = T)
 
 alignment_details <- read_tsv(f)
 
-readfile <- gsub("_trimmed.bam", "", basename(alignment_details$readfile))
+readfile <- gsub("_trimmed.mirna.unknown.bam", "", basename(alignment_details$readfile))
 
 alignment_details$LIBRARY_ID <- readfile
 
@@ -39,7 +42,7 @@ MTD <- read_tsv(mtd_f)
 alignment_details <- alignment_details %>%
   left_join(MTD) %>% select(LIBRARY_ID, Design, mapping_type,read_length,count)
 
-alignment_details %>% group_by(LIBRARY_ID) %>% tally(count) # <- concordantly w/ initial proccessed reads
+alignment_details %>% group_by(LIBRARY_ID) %>% tally(count) %>% view()# <- concordantly w/ initial proccessed reads
 
 
 # mapping_type read_length   count
@@ -52,9 +55,11 @@ recode_to <- c(`U` = "Único ", `P`= "Múltiple",`H` = "Múltiple", `R` = "Múlt
 ylab <- "% Lecturas"
 xlab <- "Longitud (Nucleótidos)"
 
+read_lengthL <- c("<21", "21", "22", "23", "24", ">24")
+
 alignment_details %>%
   dplyr::mutate(mapping_type = dplyr::recode_factor(mapping_type, !!!recode_to)) %>%
-  group_by(mapping_type, read_length) %>% 
+  group_by(Design, mapping_type, read_length) %>% 
   summarise(n = sum(count)) %>%
   group_by(read_length) %>%
   mutate(frac = n/sum(n)) %>%
@@ -73,7 +78,7 @@ alignment_details %>%
 
 # https://easystats.github.io/see/articles/seecolorscales.html#overview-of-palette-colors
 
-ggsave(ps, filename = 'ALIGNMENT_DETAILS_ES.png', path = wd, width = 4, height = 2, device = png)
+ggsave(ps, filename = 'ALIGNMENT_DETAILS_ES.png', path = path, width = 4, height = 2, device = png)
 
 
 
