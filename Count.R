@@ -6,8 +6,8 @@ options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 
 #dir <- "C:\\wsl.localhos\Ubuntu\home\ricardo\SHORTSTACKS_OUTPUTS"
 
-path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
-
+# path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE//"
 setwd(path)
 
 count_f <- list.files(path = path, pattern = "Counts.txt", full.names = T)
@@ -22,7 +22,7 @@ COUNTS <- read_tsv(count_f)
 
 colNames <- names(read_tsv(count_f))
 
-names(COUNTS)[names(COUNTS) %in% colNames] <- gsub("_trimmed", "", colNames)
+names(COUNTS)[names(COUNTS) %in% colNames] <- gsub("_trimmed.mirna.unknown", "", colNames)
 
 rowNames <- COUNTS$Name
 
