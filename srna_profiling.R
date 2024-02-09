@@ -25,7 +25,8 @@ scale_col <- c("#cd201f", "#FFFC00","#00b489","#31759b")
 MTD <- MTD %>%
   dplyr::rename("sample_id" = "LIBRARY_ID")
 
-path <- 'C:/Users/Israel V/Documents/PROFILING_BY_READ_LENGTH/'
+# path <- 'C:/Users/Israel V/Documents/PROFILING_BY_READ_LENGTH/'
+path <- "C:/Users/Israel V/Documents/PROFILING_BY_READ_LENGTH/"
 
 f_list <- list.files(path = path, pattern = ".profiling", full.names = T)
 
@@ -41,7 +42,7 @@ read_df_and_summarise <- function(x) {
   
   # df <- read_tsv(x, col_names = T)
   
-  .df <- data.table::fread(x)
+  .df <- data.table::fread(x, )
   
   # seq_id <- sapply(strsplit(.df$`#name`, " "), `[`, 1)
   
@@ -80,20 +81,19 @@ read_df_and_summarise <- function(x) {
 # write_rds(out, file = paste0(path, "prof_by_read_length_summary.rds"))
 
 
-out <- read_rds(paste0(path, "prof_by_read_length_summary.rds")) %>% 
-  left_join(MTD) %>%
-  mutate(first_nuc = recode(first_nuc, `T` = "U")) %>%
-  dplyr::mutate(rnatype = dplyr::recode_factor(rnatype, !!!recode_to))
+# out <- read_rds(paste0(path, "prof_by_read_length_summary.rds")) %>% 
+#   left_join(MTD) %>%
+#   mutate(first_nuc = recode(first_nuc, `T` = "U")) %>%
+#   dplyr::mutate(rnatype = dplyr::recode_factor(rnatype, !!!recode_to))
 
-out <- read_df_and_summarise(f_list[1])
+.out <- read_df_and_summarise(f_list[1])
 
 out <- out %>% left_join(MTD) %>%
   mutate(first_nuc = recode(first_nuc, `T` = "U"))
-  # dplyr::mutate(rnatype = dplyr::recode_factor(rnatype, !!!recode_to))
 
 # SANITY CHECK
 
-out %>% group_by(Design) %>% tally(n)
+out %>% group_by(sample_id  ) %>% tally(n)
 
 
 # 1) -----
