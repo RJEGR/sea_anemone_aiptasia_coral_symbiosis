@@ -15,7 +15,12 @@ mv *.txt REPORTS
 ## Mirtrace
 
 ```bash
-..
+# Using well directory 
+
+#cd /qc_passed_reads.all.uncollapsed
+
+#  grep "^>" SRR2716058_trimmed.fasta  | awk '{print $2}' |  sort | uniq -c
+# for i in $(ls *.fasta); do echo $i;  grep "^>" $i  | awk '{print $2}' |  sort | uniq -c; done
 
 for i in $(ls *.fasta); do seqkit fx2tab $i -l -g -H > ${i%.fasta}.profiling; done &
 
