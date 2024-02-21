@@ -84,3 +84,22 @@ cp -r Counts.txt mir.fasta Results.txt strucVis/ alignment_details.tsv OUTPUTS/
  scp -r francesco.cicala@home.bca.unipd.it://mnt/nfs/home/francesco.cicala/Corals/RICARDO/ShortStack_20240203_out/OUTPUTS .
 
 ```
+
+
+
+### MIRDEE2
+
+```bash
+bowtie-build GENOMES.fa GENOMES
+
+for i in $(ls /mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/mirtrace.20240207-164934.646/qc_passed_reads.rnatype_unknown.uncollapsed/*.mirna.unknown.fasta); do remove_white_space_in_id.pl $i > ${i%.fasta}.whitespac.fa
+
+ls * | grep whitespac.fa | sort > f2.tmp && cut -d '.' -f 1 f2.tmp > f1.tmp
+
+paste f1.tmp f2.tmp | column -t > config.txt && rm *tmp
+
+
+mapper.pl config.txt -d -c -j -l 18 -m -s reads_collapsed.fa -p GENOMES
+```
+
+continue w https://github.com/RJEGR/Small-RNASeq-data-analysis/blob/master/RAW_TUTORIAL_BKP/TUTORIAL.md#3-optional-mirdeep2pl-to-detect-novel-mirna-candidates
