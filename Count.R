@@ -87,6 +87,7 @@ P <- sample_cor_long %>%
   guides(y.sec = guide_axis_manual(labels = hc_order, label_size = 5, label_family = "GillSans")) +
   # ggh4x::scale_x_dendrogram(hclust = hc_samples, position = "top", labels = NULL) +
   theme_bw(base_size = 7, base_family = "GillSans") +
+  # ggsci::scale_fill_material("indigo") +
   labs(x = '', y = '') +
   theme(
     legend.position = "bottom",
