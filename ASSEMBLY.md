@@ -22,13 +22,22 @@ mv *.txt REPORTS
 #  grep "^>" SRR2716058_trimmed.fasta  | awk '{print $2}' |  sort | uniq -c
 # for i in $(ls *.fasta); do echo $i;  grep "^>" $i  | awk '{print $2}' |  sort | uniq -c; done
 
-for i in $(ls *.fasta); do seqkit fx2tab $i -l -g -H > ${i%.fasta}.profiling; done &
+# for i in $(ls *.fasta); do seqkit fx2tab $i -l -g -H > ${i%.fasta}.profiling; done &
+
+# upgrade version of profiling
+ # seqkit fx2tab SRR2716058_trimmed.fasta -l -g -H -j 6 | awk '{$3 = substr($3, 1,2)} 1' | head
+
+for i in $(ls *.fasta); do seqkit fx2tab $i -l -g -H -j 6 | awk '{$3 = substr($3, 1,2)} 1' > ${i%.fasta}.profiling; done &
+
 
 for i  in $(ls *.fasta); do cat $i | seqkit grep -n -r -p "rnatype:mirna" -p "rnatype:unknown" >  ${i%.fasta}.mirna.unknown.fa; done
 
 mkdir -p PROFILING_BY_READ_LENGTH
-mv *.profiling PROFILING_BY_READ_LENGTH
 
+for i in $(ls *.profiling); do tar -czvf ${i}.tar.gz $i; done
+
+mv *.tar.gz PROFILING_BY_READ_LENGTH
+scp -r francesco.cicala@home.bca.unipd.it://mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/mirtrace.20240207-164934.646/qc_passed_reads.all.uncollapsed/PROFILING_BY_READ_LENGTH
 ```
 
 
