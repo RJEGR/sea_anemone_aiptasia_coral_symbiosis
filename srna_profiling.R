@@ -4,7 +4,9 @@ if(!is.null(dev.list())) dev.off()
 
 options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 
-path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+# path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+
+path <- "D:/PROFILING_BY_READ_LENGTH/"
 
 setwd(path)
 
@@ -12,28 +14,27 @@ mtd_f <- list.files(path = path, pattern = "METADATA", full.names = T)
 
 library(tidyverse)
 
+library(archive)
+
 MTD <- read_tsv(mtd_f)
 
 
 scale_col <- c("#cd201f", "#FFFC00","#00b489","#31759b")
 
-# recode_to <- c(`Control` = "pH 8.0", `Low` = "pH 7.6")
 
-
-# recode_to <- structure(c("Ctrl pH", "Low pH"), names = c("Control", "Low"))
-
-MTD <- MTD %>%
-  dplyr::rename("sample_id" = "LIBRARY_ID")
+MTD <- MTD %>% dplyr::rename("sample_id" = "LIBRARY_ID")
 
 # path <- 'C:/Users/Israel V/Documents/PROFILING_BY_READ_LENGTH/'
 path <- "C:/Users/Israel V/Documents/PROFILING_BY_READ_LENGTH/"
 
-f_list <- list.files(path = path, pattern = ".profiling", full.names = T)
+f_list <- list.files(path = path, pattern = ".profiling.tar.gz", full.names = T)
 
+read_tsv(archive_read(f_list[1], file = 1))
 
 read_df_and_summarise <- function(x) {
   
   recode_to <- c(`mirna` = "A) miRs", `unknown`= "B) Desc",`rrna` = "C) ARNr", `trna` = "D) ARNt", `artifacts` = "E) Artifacts")
+  
   # recode_to <- c(`mirna` = "miRNAs", `unknown`= "Desc.",`rrna` = "ARNr", `trna` = "ARNt", `artifacts` = "Artefactos")
   
   sample_id <- sapply(strsplit(basename(x), "_"), `[`, 1)
@@ -42,7 +43,10 @@ read_df_and_summarise <- function(x) {
   
   # df <- read_tsv(x, col_names = T)
   
-  .df <- data.table::fread(x, )
+  # .df <- data.table::fread(x, )
+  
+  .df <- read.delim(archive_read(x), sep = " ")
+  
   
   # seq_id <- sapply(strsplit(.df$`#name`, " "), `[`, 1)
   
