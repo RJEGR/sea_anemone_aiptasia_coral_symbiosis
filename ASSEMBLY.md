@@ -38,6 +38,12 @@ for i in $(ls *.profiling); do tar -czvf ${i}.tar.gz $i; done
 
 mv *.tar.gz PROFILING_BY_READ_LENGTH
 scp -r francesco.cicala@home.bca.unipd.it://mnt/nfs/home/francesco.cicala/Corals/Clean_Seqs/mirtrace.20240207-164934.646/qc_passed_reads.all.uncollapsed/PROFILING_BY_READ_LENGTH
+
+# Process it in r
+
+# or,
+for i in $(ls *.profiling); do cat $i | awk '{print $2,$4}' | sort -k 2 | uniq -c > ${i%.profiling}.reads.length.summarized; done
+
 ```
 
 
