@@ -10,7 +10,7 @@ options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 
 # path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
 
-path <- "D:/SHORTSTACKS_OUTPUTS"
+path <- "D:/"
 
 setwd(path)
 
