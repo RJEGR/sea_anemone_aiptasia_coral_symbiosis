@@ -158,7 +158,7 @@ ggsave(psave, filename = 'SAMPLE_HEATMAP_MIR.png', path = path, width = 4, heigh
 
 
 # PCA
-vst <- DESeq2::vst(COUNTS) # vst if cols > 10
+vst <- DESeq2::varianceStabilizingTransformation(COUNTS+1) # vst if cols > 10
 
 PCA = prcomp(t(vst), center = T, scale. = FALSE)
 
@@ -170,14 +170,15 @@ PCAdf <- data.frame(PC1 = PCA$x[,1], PC2 = PCA$x[,2])
 
 psave <- PCAdf %>%
   mutate(LIBRARY_ID = rownames(.)) %>%
-  left_join(MTD) %>%
+  # left_join(MTD) %>%
+  mutate(group = sapply(strsplit(LIBRARY_ID, "_"), `[`, 1)) %>%
   ggplot(., aes(PC1, PC2)) +
   # coord_fixed(ratio = sd_ratio) +
   geom_abline(slope = 0, intercept = 0, linetype="dashed", alpha=0.5) +
   geom_vline(xintercept = 0, linetype="dashed", alpha=0.5) +
-  ggforce::geom_mark_ellipse(aes(group = as.factor(Design), label = as.factor(Design)),
+  ggforce::geom_mark_ellipse(aes(group = as.factor(group), label = as.factor(group)),
                              fill = 'grey', colour = 'white') +
-  geom_point(size = 7, alpha = 0.7, aes(color = Design)) +
+  geom_point(size = 7, alpha = 0.7, aes(color = group)) +
   # geom_text( family = "GillSans", mapping = aes(label = LIBRARY_ID), size = 2.5) +
   labs(caption = '', color = "") +
   xlab(paste0("PC1, VarExp: ", percentVar[1], "%")) +
@@ -187,5 +188,3 @@ psave <- PCAdf %>%
 
 ggsave(psave, filename = 'SAMPLE_PCA_MIR.png', path = path, width = 7, height = 7, device = png, dpi = 300)
 
-
-# https://github.com/RJEGR/Small-RNASeq-data-analysis/blob/master/E_expression_analysis/COUNT_TRANSFORMATION.R
