@@ -2,7 +2,6 @@ rm(list = ls())
 
 if(!is.null(dev.list())) dev.off()
 
-options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 
 path <- "D:/PROFILING_BY_READ_LENGTH"
 
