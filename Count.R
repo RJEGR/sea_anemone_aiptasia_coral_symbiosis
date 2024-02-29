@@ -7,7 +7,11 @@ options(stringsAsFactors = FALSE, readr.show_col_types = FALSE)
 #dir <- "C:\\wsl.localhos\Ubuntu\home\ricardo\SHORTSTACKS_OUTPUTS"
 
 # path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
-path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE//"
+
+# path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
+
+path <- "D:/SHORTSTACKS_OUTPUTS"
+
 setwd(path)
 
 count_f <- list.files(path = path, pattern = "Counts.txt", full.names = T)
