@@ -19,10 +19,9 @@ library(tidyverse)
 
 recode_to <- c(`U` = "Uniquely ", `P`= "Multimapper (mmap)",`R` = "Random mmap", `H` = "Highly mmap (>=50 hits) ", `N` = "Unmapped")
 
-# path <- "C:/Users/Israel V/Documents/SHORTSTACKS_OUTPUTS/"
+# path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
 
-path <- "C:/Users/Israel V/Documents/OUTPUTS_SHORTSTACKS_MIRTRACE/"
-
+path <- "D:/OUTPUTS_SHORTSTACKS_MIRTRACE/"
 
 setwd(path)
 
@@ -93,7 +92,8 @@ Treads <- read_tsv(f) %>% select_at(all_of(which_vars)) %>% rowSums()
 read_tsv(f) %>%
   mutate(PRECISION = Treads/Reads) %>%
   ggplot(aes(x = MIRNA, y = PRECISION)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(caption = "ALL FOR VARIANT AND PRECISION IDENTIFICATION")
 
 which_vars <- c("Short", c(as.character(21:30)),  "Long")
 
