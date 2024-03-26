@@ -12,8 +12,6 @@ Dr. Ricardo Gomez-Reyes
 
 Clean the canvas r memory
 
-...
-
 ```R
 rm(list = ls())
 
@@ -190,7 +188,7 @@ ggsave(psave, filename = 'SAMPLE_HEATMAP.png', path = path, width = 4, height = 
 
 # Principal component analysis
 
-Quick visualization of 
+Quick visualization for dimensionality reduction.
 
 ```R
 PCA = prcomp(t(DATA), center = T, scale. = FALSE)
