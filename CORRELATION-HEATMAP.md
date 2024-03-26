@@ -217,9 +217,17 @@ psave <- PCAdf %>%
   theme_bw(base_family = "GillSans", base_size = 18) +
   theme(plot.title = element_text(hjust = 0.5), legend.position = 'none')
 
-ggsave(psave, filename = 'SAMPLE_PCA_MIR.png', path = path, width = 7, height = 7)
+ggsave(psave, filename = 'SAMPLE_PCA.png', path = path, width = 7, height = 7)
 ```
 
 
 
-![figure-pca](/Users/cigom/Documents/GitHub/sea_anemone_aiptasia_coral_symbiosis/Figures/figure-pca.jpeg)
+<img src="Figures/figure-heatmap.jpeg" alt="figure-pca" style="zoom:50%;" />
+
+Figure 1. Correlation heatmap visualization
+
+
+
+<img src="Figures/figure-pca.jpeg" alt="figure-pca" style="zoom:40%;" />
+
+Figure 2. Principal component analysis visualization
