@@ -220,7 +220,7 @@ psave <- PCAdf %>%
 ggsave(psave, filename = 'SAMPLE_PCA.png', path = path, width = 7, height = 7)
 ```
 
-
+# Figures
 
 <img src="Figures/figure-heatmap.jpeg" alt="figure-pca" style="zoom:50%;" />
 
