@@ -220,3 +220,6 @@ psave <- PCAdf %>%
 ggsave(psave, filename = 'SAMPLE_PCA_MIR.png', path = path, width = 7, height = 7)
 ```
 
+
+
+![figure-pca](/Users/cigom/Documents/GitHub/sea_anemone_aiptasia_coral_symbiosis/Figures/figure-pca.jpeg)
